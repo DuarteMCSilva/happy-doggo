@@ -1,0 +1,32 @@
+<nav [ngClass]="{'collapsed': !isNavBarVisible }">
+  <div class="btn-wrapper">
+    <button class="closebtn" [ngClass]="{ 'closed': !isNavBarVisible}" (click)="onClickButton()">&times;</button>
+  </div>
+  <div class="container" [ngClass]="{ 'closed': !isNavBarVisible}">
+    <ul class="nav">
+      <li class="active"><button href="/">Home</button></li>
+      <li><a href="/breeds">
+        <button>Any Breed</button>
+      </a></li>
+      <li><a href="/breeds/spaniel">
+        <button>
+          <span>By Breed</span>
+          <div style="flex:1"></div>
+          <mat-icon svgicon="keyboard_arrow_right"></mat-icon>
+        </button>
+      </a>
+      </li>
+      <li><a href="/random"><button>Feeling Lucky</button></a></li>
+
+      <button class="arrow-button">Next<mat-icon icon="keyboard_arrow_right"></mat-icon></button>
+
+
+      <li class="search-box">
+        <i class='icon'></i>
+        <input class="search-input" type="text" placeholder="Search...">
+      </li>
+    </ul>
+  </div>
+
+
+</nav>
