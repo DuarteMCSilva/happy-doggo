@@ -13,3 +13,16 @@
     flex-direction: column;
     align-items: center;
   }
+
+.cdk-overlay-container{
+    left:200px;
+    top:200px;
+}
+.cdk-overlay-connected-position-bounding-box{
+    top:0 !important;
+
+}
+
+app-master-nav {
+  height: var(--content-height);
+}

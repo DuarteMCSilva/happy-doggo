@@ -2,11 +2,12 @@
     <h1> Welcome! </h1>
     <h2>Resources</h2>
     <p>Here are some links to help you get started:</p>
-
+    <div *ngFor="let breed of happyDogStateService.breedsTree">
+        <span> {{ breed.name }} </span>
+    </div>
     <h2>Next Steps</h2>
-    <p>What do you want to do next with your app?</p>
+    <p>What do you want to do next with your app?</p>    
     <app-footer></app-footer>
-
     <svg id="clouds" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677"
         viewBox="0 0 2611.084 485.677">
         <title>Gray Clouds Background</title>

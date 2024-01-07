@@ -8,6 +8,11 @@ import { MasterNavComponent } from './components/master-nav/master-nav.component
 import { ContentComponent } from './components/main/content/content.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTreeModule } from '@angular/material/tree';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatListModule } from '@angular/material/list';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [
@@ -20,10 +25,14 @@ import { MatTreeModule } from '@angular/material/tree';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatTreeModule
+    MatTreeModule,
+    HttpClientModule,
+    MatListModule,
+    MatTooltipModule,
+    MatMenuModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
