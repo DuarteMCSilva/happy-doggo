@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { HappyDogBusinessService } from 'src/app/services/business/happy-dog-business.service';
 import { HappyDogStateService } from 'src/app/services/state/happy-dog-state.service';
 
 @Component({
@@ -9,12 +10,17 @@ import { HappyDogStateService } from 'src/app/services/state/happy-dog-state.ser
 })
 export class MasterNavComponent implements OnInit {
 
+  public data: any;
+  public breeds: string[] = [];
+  public subBreedsMap: Map<string, string[]> = new Map<string, string[]>();
+
   isNavBarVisible: boolean = true;
   isBreedExpanded: boolean = false;
 
-  constructor(public happyDogStateService: HappyDogStateService) { }
+  constructor(private dogBusinessService: HappyDogBusinessService, public happyDogStateService: HappyDogStateService) { }
 
   ngOnInit(): void {
+    this.dogBusinessService.getAllBreeds();
   }
 
   onClickButton() {
