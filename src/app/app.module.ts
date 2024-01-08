@@ -17,6 +17,7 @@ import { RandomComponent } from './components/main/random/random.component';
 import { NotFoundComponent } from './components/main/not-found/not-found.component';
 import { BreedComponent } from './components/main/breed/breed.component';
 import { AllBreedsComponent } from './components/main/all-breeds/all-breeds.component';
+import { CapitalizePipe } from './utils/capitalize.pipe';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,7 +39,8 @@ const routes: Routes = [
     RandomComponent,
     NotFoundComponent,
     BreedComponent,
-    AllBreedsComponent
+    AllBreedsComponent,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [HttpClient],
+  providers: [
+    HttpClient,
+    CapitalizePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

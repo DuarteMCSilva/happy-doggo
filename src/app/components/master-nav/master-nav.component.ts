@@ -15,6 +15,8 @@ export class MasterNavComponent implements OnInit {
   public breeds: string[] = [];
   public subBreedsMap: Map<string, string[]> = new Map<string, string[]>();
 
+  private breedButtonHoverTimeout?: NodeJS.Timeout;
+
   isNavBarVisible: boolean = true;
   isBreedExpanded: boolean = false;
 
@@ -24,22 +26,36 @@ export class MasterNavComponent implements OnInit {
     this.dogBusinessService.getAllBreeds();
   }
 
-  onClickButton() {
+  onClickButton(): void {
     this.isNavBarVisible = !this.isNavBarVisible;
     console.log(this.isNavBarVisible);
   }
 
-  onExpandCategory() {
+  onExpandCategory(): void {
     this.isBreedExpanded = !this.isBreedExpanded;
   }
 
-  onOptionClick(path: string) {
+  onOptionClick(path: string): void {
     this.router.navigate([path]);
   }
 
-  onBreedHover(trigger: MatMenuTrigger, expandable: boolean) {
+  onBreedHover(trigger: MatMenuTrigger, expandable: boolean): void {
     if (expandable) {
-      trigger.openMenu();
+      setTimeout( () => trigger.openMenu(), 100);
     }
+  }
+
+  onBreedMouseLeave(trigger: MatMenuTrigger, expandable: boolean): void {
+    if (expandable) {
+      this.breedButtonHoverTimeout = setTimeout( () => trigger.closeMenu(),150);
+    }
+  }
+
+  onSubBreedMouseEnter(): void {
+    clearTimeout(this.breedButtonHoverTimeout);
+  }
+
+  onSubBreedMouseLeave(trigger: MatMenuTrigger): void {
+    setTimeout( () => trigger.closeMenu(), 250);
   }
 }
