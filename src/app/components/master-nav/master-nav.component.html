@@ -16,17 +16,17 @@
       </li>
       <mat-nav-list>
         <ng-container [ngTemplateOutlet]="navItem"
-          [ngTemplateOutletContext]="{action: onAnyBreedSearch.bind(this, '/'), text: 'Home'}"></ng-container>
+          [ngTemplateOutletContext]="{action: onOptionClick.bind(this, '/'), text: 'Home'}"></ng-container>
         <ng-container [ngTemplateOutlet]="navItem"
-          [ngTemplateOutletContext]="{action: onAnyBreedSearch.bind(this, '/breeds'), text: 'Any Breed'}"></ng-container>
+          [ngTemplateOutletContext]="{action: onOptionClick.bind(this, '/all-breeds'), text: 'All Breeds'}"></ng-container>
         <ng-container [ngTemplateOutlet]="navItem"
-          [ngTemplateOutletContext]="{action: onAnyBreedSearch.bind(this, '/random'), text: 'Feeling Lucky'}"></ng-container>
+          [ngTemplateOutletContext]="{action: onOptionClick.bind(this, '/random'), text: 'Feeling Lucky'}"></ng-container>
         <ng-container [ngTemplateOutlet]="navItem"
           [ngTemplateOutletContext]="{action: onExpandCategory.bind(this), text: 'By Breed', icon: isBreedExpanded ? 'expand_less' : 'expand_more'}"></ng-container>
           <mat-list-item class="subsection" [ngClass]="{'collapsed': !isBreedExpanded}"
             *ngFor="let breed of happyDogStateService.breedsTree">
             <ng-container [ngTemplateOutlet]="secondaryNavItem"
-              [ngTemplateOutletContext]="{breed, action: onAnyBreedSearch.bind(this, '/'), expandable: breed.subBreeds.length }"></ng-container>
+              [ngTemplateOutletContext]="{breed, action: onOptionClick.bind(this, '/'), expandable: breed.subBreeds.length }"></ng-container>
           </mat-list-item>
       </mat-nav-list>
   </div>
@@ -44,7 +44,7 @@
 <ng-template #secondaryNavItem let-breed="breed" let-expandable="expandable">
   <mat-list-item matMenu="Hello!" [mat-menu-trigger-for]="submenu" #trigger="matMenuTrigger"
     (mouseenter)="onBreedHover(trigger, expandable)">
-    <a matLine [href]="breed.name">{{ '- ' + breed.name }}</a>
+    <a matLine (click)="onOptionClick('/breeds/' + breed.name)">{{ '- ' + breed.name }}</a>
     <div *ngIf="expandable">
       <ng-container [ngTemplateOutlet]="insertIcon"
         [ngTemplateOutletContext]="{'icon': 'chevron_right'}"></ng-container>
@@ -55,7 +55,7 @@
       <mat-nav-list>
         <ng-container *ngFor="let subBreed of breed.subBreeds">
           <mat-list-item>
-            <a matLine (click)="onAnyBreedSearch('/' + breed.name + '/'+ subBreed)"> {{ subBreed }}</a>
+            <a matLine (click)="onOptionClick('/breeds/' + breed.name + '/'+ subBreed)"> {{ subBreed }}</a>
           </mat-list-item>
         </ng-container>
       </mat-nav-list>

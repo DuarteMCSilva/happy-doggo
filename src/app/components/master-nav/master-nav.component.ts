@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { Router } from '@angular/router';
 import { HappyDogBusinessService } from 'src/app/services/business/happy-dog-business.service';
 import { HappyDogStateService } from 'src/app/services/state/happy-dog-state.service';
 
@@ -17,7 +18,7 @@ export class MasterNavComponent implements OnInit {
   isNavBarVisible: boolean = true;
   isBreedExpanded: boolean = false;
 
-  constructor(private dogBusinessService: HappyDogBusinessService, public happyDogStateService: HappyDogStateService) { }
+  constructor(private router: Router, private dogBusinessService: HappyDogBusinessService, public happyDogStateService: HappyDogStateService) { }
 
   ngOnInit(): void {
     this.dogBusinessService.getAllBreeds();
@@ -32,13 +33,12 @@ export class MasterNavComponent implements OnInit {
     this.isBreedExpanded = !this.isBreedExpanded;
   }
 
-  onAnyBreedSearch(path:string){
-    /* router.navigate(['breeds']); */
-    console.log("not there yet !: " + path)
+  onOptionClick(path: string) {
+    this.router.navigate([path]);
   }
 
-  onBreedHover(trigger: MatMenuTrigger, expandable:boolean){
-    if(expandable){
+  onBreedHover(trigger: MatMenuTrigger, expandable: boolean) {
+    if (expandable) {
       trigger.openMenu();
     }
   }
