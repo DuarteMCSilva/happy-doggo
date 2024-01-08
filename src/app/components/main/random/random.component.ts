@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HappyDogBusinessService } from 'src/app/services/business/happy-dog-business.service';
 
 @Component({
   selector: 'app-random',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RandomComponent implements OnInit {
 
-  constructor() { }
+  public imageURL = '';
+
+  constructor(private happyDogBusinessService: HappyDogBusinessService) { }
 
   ngOnInit(): void {
+    this.fetchRandomImage();
+  }
+
+  fetchRandomImage() {
+    this.happyDogBusinessService.fetchRandomImage().subscribe( (url) => {
+      this.imageURL = url;
+    });
   }
 
 }

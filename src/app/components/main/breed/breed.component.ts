@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HappyDogBusinessService } from 'src/app/services/business/happy-dog-business.service';
 import { capitalizeText } from 'src/app/utils/utils';
 
 @Component({
@@ -10,23 +11,34 @@ import { capitalizeText } from 'src/app/utils/utils';
 export class BreedComponent implements OnInit {
 
   public title = '';
+  public imageURL = '';
+  public selectedBreed = '';
+  public selectedSubBreed = '';
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private happyDogBusinessService: HappyDogBusinessService) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe( (params) => {
-      const selectedBreed = params.get('breed') ?? '';
-      const selectedSubBreed = params.get('sub');
+      this.selectedBreed = params.get('breed') ?? '';
+      this.selectedSubBreed = params.get('sub') ?? '';
 
-      if(!selectedBreed){
+      if(!this.selectedBreed){
         this.router.navigate(['/not-found']);
       }
 
-      this.title = capitalizeText(selectedBreed);
+      this.fetchImageByBreed();
+  
+      this.title = capitalizeText(this.selectedBreed);
 
-      if(selectedSubBreed){
-        this.title += ' - ' + capitalizeText(selectedSubBreed)
+      if(this.selectedSubBreed){
+        this.title += ' - ' + capitalizeText(this.selectedSubBreed)
       }
     })
+  }
+
+  fetchImageByBreed() {
+    this.happyDogBusinessService.fetchImageByBreed(this.selectedBreed, this.selectedSubBreed).subscribe( (url) => {
+      this.imageURL = url;
+    });
   }
 }

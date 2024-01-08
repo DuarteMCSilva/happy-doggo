@@ -13,6 +13,21 @@ export class DogApiService {
     const reqURL = 'https://dog.ceo/api/breeds/list/all';
     return this.httpClient.get<GetResponseBreeds>(reqURL);
   }
+
+  getRandomImage(){
+    const reqURL = 'https://dog.ceo/api/breeds/image/random';
+    return this.httpClient.get<GetResponseImages>(reqURL);
+  }
+
+  getDoggoByBread(breed: string){
+    const reqURL = `https://dog.ceo/api/breed/${breed}/images/random`;
+    return this.httpClient.get<GetResponseImages>(reqURL);
+  }
+  
+  getDoggoBySubBread(breed: string, subBreed: string){
+    const reqURL = `https://dog.ceo/api/breed/${breed}/${subBreed}/images/random`;
+    return this.httpClient.get<GetResponseImages>(reqURL);
+  }
 }
 
 interface BreedsSignature {
@@ -21,5 +36,10 @@ interface BreedsSignature {
 
 interface GetResponseBreeds{
   message: BreedsSignature;
+  status: string;
+}
+
+export interface GetResponseImages {
+  message: string;
   status: string;
 }
