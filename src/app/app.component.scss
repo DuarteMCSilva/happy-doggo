@@ -1,18 +1,19 @@
-  .body {
-    display: grid;
-    grid-template-columns: var(--navbar-width) 1fr;
-    gap: 20px;
-    margin-top: 60px
-  }
+.body {
+  display: grid;
+  grid-template-columns: var(--navbar-width) 1fr;
+  gap: 20px;
+  margin-top: 60px;
+  background-color: var(--baby-blue);
+}
 
-  .content {
-    display: flex;
-    margin: var(--header-height) auto 200px;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
-    align-items: center;
-  }
+.content {
+  display: flex;
+  margin: var(--header-height) auto 200px;
+  padding: 0 16px;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+}
 
 .cdk-overlay-container{
     left:200px;

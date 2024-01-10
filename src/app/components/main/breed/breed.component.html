@@ -1,5 +1,18 @@
 <h1> {{ title }} </h1>
 
-<img [src]="imageURL" alt="A image of a cute dog" width="400" height="400">
 
 <button (click)="fetchImageByBreed()">Another one!</button>
+
+<div *ngIf="imageURLs.length > 1; else singleURL" class="row">
+    <div *ngFor="let imageURL of imageURLs" class="grid-row">
+        <app-image-grid [imageURL]="imageURL"></app-image-grid>
+    </div>
+    <div *ngIf="imageURLs.length == 0" class="alert alert-warning col-md-12" role="alert">
+        <span> Sorry! No images... </span>
+    </div>
+</div>
+
+<ng-template #singleURL let-imageURL="imageURL">
+    <app-image-grid [imageURL]="imageURL" [imageSize]=400></app-image-grid>
+</ng-template>
+

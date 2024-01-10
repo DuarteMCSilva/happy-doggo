@@ -18,6 +18,7 @@ import { NotFoundComponent } from './components/main/not-found/not-found.compone
 import { BreedComponent } from './components/main/breed/breed.component';
 import { AllBreedsComponent } from './components/main/all-breeds/all-breeds.component';
 import { CapitalizePipe } from './utils/capitalize.pipe';
+import { ImageGridComponent } from './components/main/image-grid/image-grid.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -40,7 +41,8 @@ const routes: Routes = [
     NotFoundComponent,
     BreedComponent,
     AllBreedsComponent,
-    CapitalizePipe
+    CapitalizePipe,
+    ImageGridComponent
   ],
   imports: [
     BrowserModule,

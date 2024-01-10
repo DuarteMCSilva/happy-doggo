@@ -34,25 +34,14 @@ export class HappyDogBusinessService {
 
   public fetchRandomImage(): Observable<string> {
     return this.dogApiService.getRandomImage()
-      .pipe(map((response) => this.extractMessage(response)))
   }
 
-  public fetchImageByBreed(breed: string, subBreed: string) {
+  public fetchImageByBreed(breed: string, subBreed: string, numResults: number) {
     if (subBreed) {
-      return this.dogApiService.getDoggoBySubBread(breed, subBreed).pipe(map((response) => this.extractMessage(response)));
+      return this.dogApiService.getDoggoBySubBread(breed, subBreed, numResults);
     } else {
-      return this.dogApiService.getDoggoByBread(breed).pipe(map((response) => this.extractMessage(response)));
+      return this.dogApiService.getDoggoByBread(breed, numResults);
     }
 
-  }
-
-  private extractMessage(response: GetResponseImages) {
-    if (response.status !== 'success' || !response.message) {
-      console.error("Internal service error!")
-      return '';
-    }
-
-    const imageURL = response.message
-    return imageURL;
   }
 }

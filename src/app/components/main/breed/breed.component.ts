@@ -11,9 +11,11 @@ import { CapitalizePipe } from 'src/app/utils/capitalize.pipe';
 export class BreedComponent implements OnInit {
 
   public title = '';
-  public imageURL = '';
+  public imageURLs: string[] = [];
   public selectedBreed = '';
   public selectedSubBreed = '';
+  public numResults = 25;
+  private fullBreedName = '';
 
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -33,17 +35,23 @@ export class BreedComponent implements OnInit {
 
       this.fetchImageByBreed();
 
-      this.title = this.capitalizePipe.transform(this.selectedBreed);
+      this.fullBreedName = this.capitalizePipe.transform(this.selectedBreed);
 
       if (this.selectedSubBreed) {
-        this.title += ' - ' + this.capitalizePipe.transform(this.selectedSubBreed)
+        this.fullBreedName += ' - ' + this.capitalizePipe.transform(this.selectedSubBreed)
       }
     })
   }
 
   fetchImageByBreed() {
-    this.happyDogBusinessService.fetchImageByBreed(this.selectedBreed, this.selectedSubBreed).subscribe((url) => {
-      this.imageURL = url;
+    this.happyDogBusinessService.fetchImageByBreed(this.selectedBreed, this.selectedSubBreed, this.numResults).subscribe((urls: string[]) => {
+      this.imageURLs = urls;
+      if(this.imageURLs.length > 0) {
+        this.title = `Found ${this.imageURLs.length} results for: ${this.fullBreedName} !`
+      } else {
+        this.title = 'Sorry! No results have been found!'
+      }
+      console.log(urls)
     });
   }
 }

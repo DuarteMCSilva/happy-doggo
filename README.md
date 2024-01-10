@@ -1,5 +1,7 @@
 # HappyDoggo
 
+Credit image frame: https://depositphotos.com/portfolio-1987177.html?content=vector
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.11.
 
 ## Development server
