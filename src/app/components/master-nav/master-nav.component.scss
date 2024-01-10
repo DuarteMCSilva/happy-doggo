@@ -14,6 +14,7 @@ nav {
     box-shadow: 1px 0 10px 1px var(--grey);
 
     &.collapsed {
+        transition: 0.5s;
         width: var(--navbar-width-collapsed);
     }
 
@@ -27,7 +28,7 @@ nav {
             right: 0;
             background-color: unset;
 
-            &.closed {
+            &.collapsed {
                 left: 0;
             }
         }
@@ -51,8 +52,7 @@ nav {
             padding-top: 0 !important;
         }
 
-
-        &.closed {
+        &.collapsed {
             display: none;
         }
     }

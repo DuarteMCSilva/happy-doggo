@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { BreedNode } from 'src/app/model/happy-doggo-model';
 
 interface DoggoAppState {
-  isLoading: boolean,
   breedsTree: BreedNode[]
+  isLoading: boolean,
+  navbarCollapsed: boolean
 }
 
 @Injectable({
@@ -12,8 +13,9 @@ interface DoggoAppState {
 export class HappyDogStateService {
   
   private state: DoggoAppState = {
+    breedsTree: [],
     isLoading: false,
-    breedsTree: []
+    navbarCollapsed: false
   }
 
   constructor() { }
@@ -31,5 +33,13 @@ export class HappyDogStateService {
   }
   set isLoading(isLoading: boolean){
     this.state.isLoading = isLoading;
+  }
+
+  get isNavbarCollapsed(): boolean{
+    return this.state.navbarCollapsed;
+  }
+
+  set isNavbarCollapsed(bool: boolean) {
+    this.state.navbarCollapsed = bool;
   }
 }

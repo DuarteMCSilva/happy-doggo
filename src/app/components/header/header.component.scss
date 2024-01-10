@@ -1,34 +1,43 @@
 .toolbar {
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
     right: 0;
-    z-index: 15;
+    z-index: 1;
+    width: 100%;
     height: var(--header-height);
     display: flex;
     align-items: center;
     background-color: var(--deep-blue);
     color: white;
     font-weight: 600;
+    border-radius: 6px;
   }
 
-  .toolbar img {
+  img {
     margin: 0 16px;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
-  .toolbar #twitter-logo {
+  svg {
     height: 40px;
+  }
+  svg ,img {
     margin: 0 8px;
-  }
+    transition: 0.5s ease-out;
+    
+    &#github {
+      margin: 0 16px;
+    }
 
-  .toolbar #youtube-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover,
-  .toolbar #youtube-logo:hover {
-    opacity: 0.8;
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+      transform: translateY(-2px) translateX(-2px);
+      box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+    }
   }
 
   .spacer {

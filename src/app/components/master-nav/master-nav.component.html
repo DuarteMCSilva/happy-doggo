@@ -2,14 +2,14 @@
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<nav [ngClass]="{'collapsed': !isNavBarVisible }">
+<nav [ngClass]="{'collapsed': isNavBarCollapsed }">
   <div class="btn-wrapper">
-    <button class="closebtn" [ngClass]="{ 'closed': !isNavBarVisible}" (click)="onClickButton()">
+    <button class="closebtn" [ngClass]="{ 'closed': isNavBarCollapsed}" (click)="onClickCollapseButton()">
       <ng-container [ngTemplateOutlet]="insertIcon"
-        [ngTemplateOutletContext]="{'icon': isNavBarVisible ? 'collapse_content': 'expand_content'}"></ng-container>
+        [ngTemplateOutletContext]="{'icon': isNavBarCollapsed ? 'expand_content' : 'collapse_content'}"></ng-container>
     </button>
   </div>
-  <div class="container" [ngClass]="{ 'closed': !isNavBarVisible}">
+  <div class="container" [ngClass]="{ 'collapsed': isNavBarCollapsed}">
       <mat-nav-list>
         <ng-container [ngTemplateOutlet]="navItem"
           [ngTemplateOutletContext]="{action: onOptionClick.bind(this, '/'), text: 'Home'}"></ng-container>

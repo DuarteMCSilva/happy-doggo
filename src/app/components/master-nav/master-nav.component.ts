@@ -17,18 +17,19 @@ export class MasterNavComponent implements OnInit {
 
   private breedButtonHoverTimeout?: NodeJS.Timeout;
 
-  isNavBarVisible: boolean = true;
+  isNavBarCollapsed: boolean = false;
   isBreedExpanded: boolean = false;
 
   constructor(private router: Router, private dogBusinessService: HappyDogBusinessService, public happyDogStateService: HappyDogStateService) { }
 
   ngOnInit(): void {
+    this.isNavBarCollapsed = this.happyDogStateService.isNavbarCollapsed;
     this.dogBusinessService.getAllBreeds();
   }
 
-  onClickButton(): void {
-    this.isNavBarVisible = !this.isNavBarVisible;
-    console.log(this.isNavBarVisible);
+  onClickCollapseButton(): void {
+    this.isNavBarCollapsed = !this.isNavBarCollapsed;
+    this.happyDogStateService.isNavbarCollapsed = this.isNavBarCollapsed;
   }
 
   onExpandCategory(): void {
