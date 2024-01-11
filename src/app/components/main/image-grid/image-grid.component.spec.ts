@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AllBreedsComponent } from './all-breeds.component';
+import { ImageGridComponent } from './image-grid.component';
 
-describe('AllBreedsComponent', () => {
-  let component: AllBreedsComponent;
-  let fixture: ComponentFixture<AllBreedsComponent>;
+describe('ImageGridComponent', () => {
+  let component: ImageGridComponent;
+  let fixture: ComponentFixture<ImageGridComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AllBreedsComponent ]
+      declarations: [ ImageGridComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AllBreedsComponent);
+    fixture = TestBed.createComponent(ImageGridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

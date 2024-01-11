@@ -14,8 +14,6 @@
         <ng-container [ngTemplateOutlet]="navItem"
           [ngTemplateOutletContext]="{action: onOptionClick.bind(this, '/'), text: 'Home'}"></ng-container>
         <ng-container [ngTemplateOutlet]="navItem"
-          [ngTemplateOutletContext]="{action: onOptionClick.bind(this, '/all-breeds'), text: 'All Breeds'}"></ng-container>
-        <ng-container [ngTemplateOutlet]="navItem"
           [ngTemplateOutletContext]="{action: onOptionClick.bind(this, '/random'), text: 'Feeling Lucky'}"></ng-container>
         <ng-container [ngTemplateOutlet]="navItem"
           [ngTemplateOutletContext]="{action: onExpandCategory.bind(this), text: 'By Breed', icon: isBreedExpanded ? 'expand_less' : 'expand_more'}"></ng-container>

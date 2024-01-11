@@ -16,18 +16,17 @@ import { HomeComponent } from './components/main/home/home.component';
 import { RandomComponent } from './components/main/random/random.component';
 import { NotFoundComponent } from './components/main/not-found/not-found.component';
 import { BreedComponent } from './components/main/breed/breed.component';
-import { AllBreedsComponent } from './components/main/all-breeds/all-breeds.component';
 import { CapitalizePipe } from './utils/capitalize.pipe';
-import { ImageFrameComponent } from './components/main/image-frame/image-frame.component';
+import { ImageFrameComponent } from './components/main/image-grid/image-frame/image-frame.component';
 import { FormsModule }   from '@angular/forms';
 import { SearchFormComponent } from './components/main/search-form/search-form.component';
+import { ImageGridComponent } from './components/main/image-grid/image-grid.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'random', component: RandomComponent },
   { path: 'breeds/:breed/:sub', component: BreedComponent },
   { path: 'breeds/:breed', component: BreedComponent },
-  { path: 'all-breeds', component: AllBreedsComponent },
   { path: '**', component: NotFoundComponent }
 ]
 
@@ -42,10 +41,10 @@ const routes: Routes = [
     RandomComponent,
     NotFoundComponent,
     BreedComponent,
-    AllBreedsComponent,
     CapitalizePipe,
     ImageFrameComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    ImageGridComponent
   ],
   imports: [
     BrowserModule,

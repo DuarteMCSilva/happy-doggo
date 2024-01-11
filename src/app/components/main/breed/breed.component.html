@@ -1,16 +1,5 @@
 <h1> {{ title }} </h1>
 
-
 <button (click)="fetchImageByBreed()">Another one!</button>
 
-<div *ngIf="imageURLs.length > 1" class="row">
-    <div *ngFor="let imageURL of imageURLs" class="grid-row">
-        <app-image-frame [imageURL]="imageURL"></app-image-frame>
-    </div>
-</div>
-<div *ngIf="imageURLs.length == 0" class="alert alert-warning col-md-12" role="alert">
-    <span> Sorry! No images... </span>
-</div>
-<app-image-frame *ngIf="imageURLs.length == 1" [imageURL]="imageURLs[0]" [imageSize]=400></app-image-frame>
-
-
+<app-image-grid [imageURLs]="imageURLs"></app-image-grid>

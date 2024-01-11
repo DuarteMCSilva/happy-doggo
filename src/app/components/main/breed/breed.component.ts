@@ -24,8 +24,11 @@ export class BreedComponent implements OnInit {
     private capitalizePipe: CapitalizePipe) { }
 
   ngOnInit(): void {
+    this.subscribeToActiveRoute();
+  }
+
+  subscribeToActiveRoute(){
     this.activatedRoute.paramMap.subscribe((params) => {
-      console.log("hey")
       this.selectedBreed = params.get('breed') ?? '';
       this.selectedSubBreed = params.get('sub') ?? '';
 
@@ -51,7 +54,6 @@ export class BreedComponent implements OnInit {
       } else {
         this.title = 'Sorry! No results have been found!'
       }
-      console.log(urls)
     });
   }
 }
