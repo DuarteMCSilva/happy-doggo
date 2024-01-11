@@ -1,7 +1,7 @@
 
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BreedNode } from 'src/app/model/happy-doggo-model';
 import { HappyDogStateService } from 'src/app/services/state/happy-dog-state.service';
@@ -15,18 +15,27 @@ export class SearchFormComponent implements OnInit {
   public breedsTree$: Observable<BreedNode[]>;
   public selectedBreedNode?: BreedNode;
   public selectedSubBreed?: string;
+  @ViewChild('form', { static: false }) searchForm?: NgForm;
 
   @Output() images: string[] = [];
 
   constructor(
     public happyDogStateService: HappyDogStateService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
     ) { 
     this.breedsTree$ = new Observable<BreedNode[]>();
   }
 
   ngOnInit(): void {
     this.breedsTree$ = this.happyDogStateService.breedsTree$;
+    this.subscribeToActivatedRoute();
+  }
+
+  subscribeToActivatedRoute(){
+    this.activatedRoute.paramMap.subscribe( (params) => {
+      this.searchForm?.onReset();
+    })
   }
 
   onSubmit(form: NgForm) {
@@ -34,7 +43,7 @@ export class SearchFormComponent implements OnInit {
 
     const breed = params.breed.name;
     const subBreed = params.subBreed;
-
+    this.happyDogStateService.isLoading = true;
     if(subBreed) {
       const url = `breeds/${breed}/${subBreed}` 
       this.router.navigate([url]);
