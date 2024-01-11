@@ -1,5 +1,11 @@
-<h1> {{ title }} </h1>
-
-<button (click)="fetchImageByBreed()">Another one!</button>
-<app-loading-notification *ngIf="(happyDogStateService.isLoading$| async)"></app-loading-notification>
+<app-search-form></app-search-form>
+<hr />
+<div *ngIf="!(happyDogStateService.isLoading$ | async)">
+    <div class="title">
+        <h1>{{ fullBreedName }}</h1>
+    </div>
+    <h3>{{ message }}</h3>
+</div>
+<app-loading-notification *ngIf="happyDogStateService.isLoading$ | async"></app-loading-notification>
 <app-image-grid *ngIf="!(happyDogStateService.isLoading$ | async)" [imageURLs]="imageURLs"></app-image-grid>
+<hr />

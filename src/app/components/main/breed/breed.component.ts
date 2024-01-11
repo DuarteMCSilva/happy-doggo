@@ -11,12 +11,12 @@ import { CapitalizePipe } from 'src/app/utils/capitalize.pipe';
 })
 export class BreedComponent implements OnInit {
 
-  public title = '';
+  public message = '';
   public imageURLs: string[] = [];
   public selectedBreed = '';
   public selectedSubBreed = '';
   public numResults = 25;
-  private fullBreedName = '';
+  public fullBreedName = '';
 
   constructor(
     private activatedRoute: ActivatedRoute, 
@@ -49,13 +49,14 @@ export class BreedComponent implements OnInit {
   }
 
   fetchImageByBreed() {
+    this.happyDogStateService.isLoading = true;
     this.happyDogBusinessService.fetchImageByBreed(this.selectedBreed, this.selectedSubBreed, this.numResults).subscribe((urls: string[]) => {
       this.imageURLs = urls;
       this.happyDogStateService.isLoading = false;
       if(this.imageURLs.length > 0) {
-        this.title = `Found ${this.imageURLs.length} results for: ${this.fullBreedName} !`
+        this.message = `Found ${this.imageURLs.length} results for ${this.fullBreedName}!`
       } else {
-        this.title = 'Sorry! No results have been found!'
+        this.message = 'Sorry! No results have been found!'
       }
     });
   }
