@@ -1,9 +1,18 @@
-<div *ngIf="imageURLs.length == 0" class="alert alert-warning col-md-12" role="alert">
-    <span> Sorry! No images... </span>
-</div>
-<app-image-frame *ngIf="imageURLs.length == 1" [imageURL]="imageURLs[0]" [imageSize]=400></app-image-frame>
-<div *ngIf="imageURLs.length > 1" class="row">
-    <div *ngFor="let imageURL of imageURLs" class="grid-row" [ngClass]="{'two-images': imageURLs.length === 2}">
-        <app-image-frame [imageURL]="imageURL" [imageSize]="imageSize"></app-image-frame>
+<hr>
+<div class="grid-wrapper">
+    <div *ngIf="imageURLs.length == 0" class="alert alert-warning col-md-12" role="alert">
+        <span> Sorry! No images... </span>
+    </div>
+    <app-image-frame *ngIf="imageURLs.length == 1" [imageURL]="imageURLs[0]" [imageSize]=400></app-image-frame>
+    <div *ngIf="imageURLs.length > 2" class="row">
+        <div *ngFor="let imageURL of imageURLs" class="grid-row">
+            <app-image-frame [imageURL]="imageURL" [imageSize]="imageSize"></app-image-frame>
+        </div>
+    </div>
+    <div *ngIf="imageURLs.length === 2" class="row">
+        <div *ngFor="let imageURL of imageURLs" class="two-images">
+            <app-image-frame [imageURL]="imageURL" [imageSize]="imageSize"></app-image-frame>
+        </div>
     </div>
 </div>
+<hr>

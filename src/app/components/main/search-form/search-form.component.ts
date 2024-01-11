@@ -42,4 +42,8 @@ export class SearchFormComponent implements OnInit {
 
     this.router.navigate([`breeds/${breed}`]);
   }
+
+  onFeelingLucky() {
+    this.router.navigate(['random']);
+  }
 }

@@ -1,3 +1,10 @@
 <h1> Random Image! </h1>
+<app-search-form></app-search-form>
 
-<app-image-frame [imageURL]="imageURL" [imageSize]=400></app-image-frame>
+<hr>
+<app-image-frame [imageURL]="imageURL" [imageSize]=400 priority></app-image-frame>
+<hr>
+<div *ngIf="completeBreedName" class="feedback-container">
+    <h3 class="message">{{ "It is a " + completeBreedName  + "!!" }}</h3>
+    <button class="more" (click)="onClickMoreResults()"> {{ "More results!" }} </button>
+</div>

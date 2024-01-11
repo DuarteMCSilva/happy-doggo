@@ -1,7 +1,9 @@
 .search-wrapper {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-content: center;
+    justify-content: center;
     background-color: var(--cream-coffee);
     padding: 10px;
     border-radius: 6px;
@@ -12,7 +14,13 @@
 .search-button {
     height: 32px;
     width: 32px;
+}
+
+.search-button, 
+.feeling-lucky {
     display: flex;
+    flex-wrap: wrap;
+    align-content: center;
     margin-left: 10px;
     border: 1px solid var(--grey);
     border-radius: 4px;
@@ -26,6 +34,8 @@
 
 .button-wrapper {
     margin: auto;
+    display: flex;
+    margin: auto 10px;
 }
 
 select {
