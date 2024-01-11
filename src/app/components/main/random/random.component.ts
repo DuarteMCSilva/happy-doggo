@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HappyDogBusinessService } from 'src/app/services/business/happy-dog-business.service';
+import { HappyDogStateService } from 'src/app/services/state/happy-dog-state.service';
 import { CapitalizePipe } from 'src/app/utils/capitalize.pipe';
 
 @Component({
@@ -14,7 +15,11 @@ export class RandomComponent implements OnInit {
   public completeBreedName = '';
   public buttonLinkElements: string[] = [];
 
-  constructor(private happyDogBusinessService: HappyDogBusinessService, private capitalizePipe: CapitalizePipe, private router: Router) { }
+  constructor(
+    private happyDogBusinessService: HappyDogBusinessService,
+    public happyDogStateService: HappyDogStateService,
+    private capitalizePipe: CapitalizePipe, 
+    private router: Router) { }
 
   ngOnInit(): void {
     this.fetchRandomImage();
@@ -24,6 +29,7 @@ export class RandomComponent implements OnInit {
     this.happyDogBusinessService.fetchRandomImage().subscribe( (url) => {
       this.imageURL = url;
       this.completeBreedName = this.getBreedNameFromResponse(this.imageURL);
+      this.happyDogStateService.isLoading = false;
     });
   }
   

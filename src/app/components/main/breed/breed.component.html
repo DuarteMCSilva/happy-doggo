@@ -1,5 +1,5 @@
 <h1> {{ title }} </h1>
 
 <button (click)="fetchImageByBreed()">Another one!</button>
-
-<app-image-grid [imageURLs]="imageURLs"></app-image-grid>
+<app-loading-notification *ngIf="(happyDogStateService.isLoading$| async)"></app-loading-notification>
+<app-image-grid *ngIf="!(happyDogStateService.isLoading$ | async)" [imageURLs]="imageURLs"></app-image-grid>

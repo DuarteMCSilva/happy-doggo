@@ -47,6 +47,7 @@ export class HappyDogStateService {
   }
   set isLoading(isLoading: boolean){
     this.state.isLoading = isLoading;
+    console.log(isLoading);
     this.isLoadingSubject.next(this.state.isLoading);
   }
 

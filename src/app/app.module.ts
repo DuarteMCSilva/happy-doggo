@@ -21,6 +21,7 @@ import { ImageFrameComponent } from './components/main/image-grid/image-frame/im
 import { FormsModule }   from '@angular/forms';
 import { SearchFormComponent } from './components/main/search-form/search-form.component';
 import { ImageGridComponent } from './components/main/image-grid/image-grid.component';
+import { LoadingNotificationComponent } from './components/main/loading-notification/loading-notification.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -44,7 +45,8 @@ const routes: Routes = [
     CapitalizePipe,
     ImageFrameComponent,
     SearchFormComponent,
-    ImageGridComponent
+    ImageGridComponent,
+    LoadingNotificationComponent
   ],
   imports: [
     BrowserModule,

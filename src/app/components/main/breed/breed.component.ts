@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HappyDogBusinessService } from 'src/app/services/business/happy-dog-business.service';
+import { HappyDogStateService } from 'src/app/services/state/happy-dog-state.service';
 import { CapitalizePipe } from 'src/app/utils/capitalize.pipe';
 
 @Component({
@@ -21,6 +22,7 @@ export class BreedComponent implements OnInit {
     private activatedRoute: ActivatedRoute, 
     private router: Router, 
     private happyDogBusinessService: HappyDogBusinessService, 
+    public happyDogStateService: HappyDogStateService,
     private capitalizePipe: CapitalizePipe) { }
 
   ngOnInit(): void {
@@ -49,6 +51,7 @@ export class BreedComponent implements OnInit {
   fetchImageByBreed() {
     this.happyDogBusinessService.fetchImageByBreed(this.selectedBreed, this.selectedSubBreed, this.numResults).subscribe((urls: string[]) => {
       this.imageURLs = urls;
+      this.happyDogStateService.isLoading = false;
       if(this.imageURLs.length > 0) {
         this.title = `Found ${this.imageURLs.length} results for: ${this.fullBreedName} !`
       } else {

@@ -3,6 +3,7 @@
 Credit image frame: https://depositphotos.com/portfolio-1987177.html?content=vector
 Credit to icon image: https://perchance.org/ai-photo-generator
 Credit to LinkedIn and GitHub icons: https://icons8.com/icons/ios-glyphs
+Credit to Loading Screen animation: https://loading.io/asset/714910
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.11.
 

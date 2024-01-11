@@ -12,4 +12,8 @@ export class AppComponent {
   constructor(public happyDogStateService: HappyDogStateService, private dogBusinessService: HappyDogBusinessService, ) {
     this.dogBusinessService.getAllBreeds();
   }
+
+  onRouteChange(){
+    this.happyDogStateService.isLoading = true;
+  }
 }
