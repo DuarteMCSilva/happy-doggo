@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'app-image-grid',
-  templateUrl: './image-grid.component.html',
-  styleUrls: ['./image-grid.component.scss']
+  selector: 'app-image-frame',
+  templateUrl: './image-frame.component.html',
+  styleUrls: ['./image-frame.component.scss']
 })
-export class ImageGridComponent implements OnInit {
+export class ImageFrameComponent implements OnInit {
   @Input() imageURL: string = '';
   @Input() imageSize: number = 200;
   private SCALE_FACTOR = 1.15;

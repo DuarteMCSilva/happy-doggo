@@ -18,7 +18,7 @@ import { NotFoundComponent } from './components/main/not-found/not-found.compone
 import { BreedComponent } from './components/main/breed/breed.component';
 import { AllBreedsComponent } from './components/main/all-breeds/all-breeds.component';
 import { CapitalizePipe } from './utils/capitalize.pipe';
-import { ImageGridComponent } from './components/main/image-grid/image-grid.component';
+import { ImageFrameComponent } from './components/main/image-frame/image-frame.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,7 +42,7 @@ const routes: Routes = [
     BreedComponent,
     AllBreedsComponent,
     CapitalizePipe,
-    ImageGridComponent
+    ImageFrameComponent
   ],
   imports: [
     BrowserModule,
