@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { DogApiService, GetResponseImages } from '../api/dog-api.service';
+import { DogApiService } from '../api/dog-api.service';
 import { HappyDogStateService } from '../state/happy-dog-state.service';
 import { BreedNode } from 'src/app/model/happy-doggo-model';
-import { Observable, map } from 'rxjs';
+import { Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

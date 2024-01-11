@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BreedNode } from 'src/app/model/happy-doggo-model';
 
 interface DoggoAppState {
@@ -11,6 +12,12 @@ interface DoggoAppState {
   providedIn: 'root'
 })
 export class HappyDogStateService {
+
+  readonly breedsTree$: Observable<BreedNode[]>;
+  readonly isLoading$: Observable<boolean>;
+
+  readonly breedsTreeSubject: BehaviorSubject<BreedNode[]>;
+  readonly isLoadingSubject: BehaviorSubject<boolean>;
   
   private state: DoggoAppState = {
     breedsTree: [],
@@ -18,7 +25,13 @@ export class HappyDogStateService {
     navbarCollapsed: false
   }
 
-  constructor() { }
+  constructor() { 
+    this.breedsTreeSubject = new BehaviorSubject<BreedNode[]>([]);
+    this.breedsTree$ = this.breedsTreeSubject.asObservable();
+
+    this.isLoadingSubject = new BehaviorSubject<boolean>(false);
+    this.isLoading$ = this.isLoadingSubject.asObservable();
+  } 
 
   get breedsTree(): BreedNode[] {
     return this.state.breedsTree;
@@ -26,6 +39,7 @@ export class HappyDogStateService {
 
   set breedsTree(breeds: BreedNode[]) {
     this.state.breedsTree = breeds;
+    this.breedsTreeSubject.next(this.state.breedsTree);
   }
 
   get isLoading(): boolean {
@@ -33,6 +47,7 @@ export class HappyDogStateService {
   }
   set isLoading(isLoading: boolean){
     this.state.isLoading = isLoading;
+    this.isLoadingSubject.next(this.state.isLoading);
   }
 
   get isNavbarCollapsed(): boolean{

@@ -19,6 +19,8 @@ import { BreedComponent } from './components/main/breed/breed.component';
 import { AllBreedsComponent } from './components/main/all-breeds/all-breeds.component';
 import { CapitalizePipe } from './utils/capitalize.pipe';
 import { ImageFrameComponent } from './components/main/image-frame/image-frame.component';
+import { FormsModule }   from '@angular/forms';
+import { SearchFormComponent } from './components/main/search-form/search-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,7 +44,8 @@ const routes: Routes = [
     BreedComponent,
     AllBreedsComponent,
     CapitalizePipe,
-    ImageFrameComponent
+    ImageFrameComponent,
+    SearchFormComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ const routes: Routes = [
     MatListModule,
     MatTooltipModule,
     MatMenuModule,
+    FormsModule,
     RouterModule.forRoot(routes)
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

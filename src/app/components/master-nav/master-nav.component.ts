@@ -20,11 +20,11 @@ export class MasterNavComponent implements OnInit {
   isNavBarCollapsed: boolean = false;
   isBreedExpanded: boolean = false;
 
-  constructor(private router: Router, private dogBusinessService: HappyDogBusinessService, public happyDogStateService: HappyDogStateService) { }
+  constructor(private router: Router, public happyDogStateService: HappyDogStateService) { }
 
   ngOnInit(): void {
     this.isNavBarCollapsed = this.happyDogStateService.isNavbarCollapsed;
-    this.dogBusinessService.getAllBreeds();
+
   }
 
   onClickCollapseButton(): void {
