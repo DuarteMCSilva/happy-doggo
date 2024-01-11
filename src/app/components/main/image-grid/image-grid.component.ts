@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ImageGridComponent implements OnInit {
 
   @Input() imageURLs: string[] = [];
+  @Input() imageSize: number = 200;
 
   constructor() { }
 

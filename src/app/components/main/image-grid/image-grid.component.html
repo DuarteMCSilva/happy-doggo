@@ -3,7 +3,7 @@
 </div>
 <app-image-frame *ngIf="imageURLs.length == 1" [imageURL]="imageURLs[0]" [imageSize]=400></app-image-frame>
 <div *ngIf="imageURLs.length > 1" class="row">
-    <div *ngFor="let imageURL of imageURLs" class="grid-row">
-        <app-image-frame [imageURL]="imageURL"></app-image-frame>
+    <div *ngFor="let imageURL of imageURLs" class="grid-row" [ngClass]="{'two-images': imageURLs.length === 2}">
+        <app-image-frame [imageURL]="imageURL" [imageSize]="imageSize"></app-image-frame>
     </div>
 </div>

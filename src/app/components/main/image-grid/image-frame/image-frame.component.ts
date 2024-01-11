@@ -6,11 +6,12 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
   styleUrls: ['./image-frame.component.scss']
 })
 export class ImageFrameComponent implements OnInit {
+  private readonly DEFAULT_IMG_SIZE = 200;
   @Input() imageURL: string = '';
-  @Input() imageSize: number = 200;
+  @Input() imageSize: number = this.DEFAULT_IMG_SIZE;
   private SCALE_FACTOR = 1.15;
 
-  public borderSize: string = '200px';
+  public borderSize: string = `${this.DEFAULT_IMG_SIZE}px` ;
 
   constructor() { }
 

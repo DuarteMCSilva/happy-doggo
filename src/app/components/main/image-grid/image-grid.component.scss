@@ -1,6 +1,11 @@
-.grid-row {
+.grid-row:not(.two-images) {
     flex: 0 0 auto;
     width: 25%;
+}
+
+.grid-row.two-images {
+    flex: 0 0 auto;
+    width: 50%;
 }
 
 @media screen and (max-width: 1520px) {
@@ -20,6 +25,18 @@
 
 @media screen and (max-width: 950px) {
     .grid-row {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .grid-row:not(.two-images) {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .grid-row.two-images {
         flex: 0 0 auto;
         width: 100%;
     }
