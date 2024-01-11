@@ -5,7 +5,7 @@
   --cream-coffee: #D9B48FFF;
   --grey: #808080;
   --navbar-width: 300px;
-  --navbar-width-collapsed: 45px;
+  --navbar-width-collapsed: 60px;
   --header-height: 60px;
   --footer-height: 0px;
   --content-height: calc(100vh - var(--footer-height));
@@ -39,3 +39,26 @@ body {
   margin: 0; 
   font-family: 'Comic Sans MS';
 }
+
+// Overwrite some predefined styles:
+.mat-menu-panel {
+  border-radius: 8px !important;
+}
+.mat-menu-content {
+  background-color: var(--cream-coffee);
+}
+
+.mat-list-base {
+  padding-top: 0 !important;
+}
+
+.cdk-overlay-pane {
+  position: fixed !important;
+  left: calc(var(--navbar-width) - 20px);
+}
+
+.cdk-overlay-container {
+  height: unset;
+  width: unset;
+}
+

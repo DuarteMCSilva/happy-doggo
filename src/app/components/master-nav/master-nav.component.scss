@@ -8,7 +8,7 @@ nav {
     overflow-x: hidden;
     overflow-y: hidden;
     display: grid;
-    grid-template-rows: 45px 1fr;
+    grid-template-rows: var(--header-height) 1fr;
     transition: 0.5s;
     border-radius: 0 6px 6px 0;
     box-shadow: 1px 0 10px 1px var(--grey);
@@ -36,12 +36,11 @@ nav {
 
     a {
         text-decoration: none;
-        color: var(--deep-blue);
         display: block;
         transition: 0.3s;
     }
 
-    .container {
+    .nav-container {
         margin: 0 6px 6px 6px;
         overflow-y: auto;
         overflow-x: hidden;
@@ -72,7 +71,7 @@ button {
     cursor: pointer;
 
     .material-symbols-outlined {
-        font-size: 22px;
+        font-size: 24px;
     }
 
     &:hover {
@@ -80,7 +79,7 @@ button {
         border-radius: 4px;
 
         .material-symbols-outlined {
-            font-size: 26px;
+            font-size: 28px;
         }
     }
 }
@@ -153,25 +152,11 @@ mat-list-item, .subsection {
     }
 }
 
-.main-item {
+.main-item, .subsection-item {
     transition: 0.5s;
     border-bottom: solid var(--deep-blue) 1px;
 }
 
-::ng-deep.mat-menu-panel {
-    width: var(--navbar-width);
-    height: max-content;
-}
-
-::ng-deep .cdk-overlay-pane {
-    position: fixed !important;
-    left: calc(var(--navbar-width) - 20px)  !important;
-  }
-
-::ng-deep .cdk-overlay-container {
-    height: unset !important;
-    width: unset !important;
-}
 
 ::-webkit-scrollbar {
     width: 7px;

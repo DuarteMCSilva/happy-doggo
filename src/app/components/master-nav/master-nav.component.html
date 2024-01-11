@@ -2,61 +2,75 @@
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<nav [ngClass]="{'collapsed': isNavBarCollapsed }">
+<nav [ngClass]="{ collapsed: isNavBarCollapsed }">
   <div class="btn-wrapper">
-    <button class="closebtn" [ngClass]="{ 'closed': isNavBarCollapsed}" (click)="onClickCollapseButton()">
-      <ng-container [ngTemplateOutlet]="insertIcon"
-        [ngTemplateOutletContext]="{'icon': isNavBarCollapsed ? 'expand_content' : 'collapse_content'}"></ng-container>
+    <button class="closebtn" [ngClass]="{ closed: isNavBarCollapsed }" (click)="onClickCollapseButton()">
+      <ng-container [ngTemplateOutlet]="insertIcon" [ngTemplateOutletContext]="{
+          icon: isNavBarCollapsed ? 'expand_content' : 'collapse_content'
+        }"></ng-container>
     </button>
   </div>
-  <div class="container" [ngClass]="{ 'collapsed': isNavBarCollapsed}">
-      <mat-nav-list>
-        <ng-container [ngTemplateOutlet]="navItem"
-          [ngTemplateOutletContext]="{action: onOptionClick.bind(this, '/'), text: 'Home'}"></ng-container>
-        <ng-container [ngTemplateOutlet]="navItem"
-          [ngTemplateOutletContext]="{action: onOptionClick.bind(this, '/random'), text: 'Feeling Lucky'}"></ng-container>
-        <ng-container [ngTemplateOutlet]="navItem"
-          [ngTemplateOutletContext]="{action: onExpandCategory.bind(this), text: 'By Breed', icon: isBreedExpanded ? 'expand_less' : 'expand_more'}"></ng-container>
-        <div class="subsection" [ngClass]="{'collapsed': !isBreedExpanded}"
-          *ngFor="let breed of happyDogStateService.breedsTree">
-          <ng-container [ngTemplateOutlet]="secondaryNavItem"
-            [ngTemplateOutletContext]="{breed, action: onOptionClick.bind(this, '/'), expandable: breed.subBreeds.length }">
-          </ng-container>
-        </div>
-      </mat-nav-list>
+  <div class="nav-container" [ngClass]="{ collapsed: isNavBarCollapsed }">
+    <mat-nav-list>
+      <ng-container [ngTemplateOutlet]="navItem" [ngTemplateOutletContext]="{
+          action: onOptionClick.bind(this, '/'),
+          text: 'Home'
+        }"></ng-container>
+      <ng-container [ngTemplateOutlet]="navItem" [ngTemplateOutletContext]="{
+          action: onOptionClick.bind(this, '/random'),
+          text: 'Feeling Lucky'
+        }"></ng-container>
+      <ng-container [ngTemplateOutlet]="navItem" [ngTemplateOutletContext]="{
+          action: onExpandCategory.bind(this),
+          text: 'By Breed',
+          icon: isBreedExpanded ? 'expand_less' : 'expand_more'
+        }"></ng-container>
+      <div class="subsection" [ngClass]="{ collapsed: !isBreedExpanded }"
+        *ngFor="let breed of happyDogStateService.breedsTree">
+        <ng-container [ngTemplateOutlet]="secondaryNavItem"
+          [ngTemplateOutletContext]="{breed, action: onOptionClick.bind(this, '/'), expandable: breed.subBreeds.length }">
+        </ng-container>
+      </div>
+    </mat-nav-list>
   </div>
 </nav>
-
 <ng-template #navItem let-action="action" let-text="text" let-icon="icon">
   <mat-list-item class="main-item">
     <a matLine (click)="action()"> {{ text }}</a>
     <div *ngIf="icon" (click)="action()">
-      <ng-container [ngTemplateOutlet]="insertIcon" [ngTemplateOutletContext]="{'icon': icon}">
+      <ng-container [ngTemplateOutlet]="insertIcon" [ngTemplateOutletContext]="{ icon: icon }">
       </ng-container>
     </div>
   </mat-list-item>
 </ng-template>
+
 <ng-template #secondaryNavItem let-breed="breed" let-expandable="expandable">
-  <mat-list-item matMenu="Hello!" [mat-menu-trigger-for]="submenu" #trigger="matMenuTrigger"
-    (mouseenter)="onBreedHover(trigger, expandable)" (mouseleave)="onBreedMouseLeave(trigger, expandable)" (click)="trigger.closeMenu()">
-    <a matLine (click)="onOptionClick('/breeds/' + breed.name)">{{ '- ' + ( breed.name | capitalize )}}</a>
+  <mat-list-item matMenu="menu" [mat-menu-trigger-for]="submenu" #trigger="matMenuTrigger"
+    (mouseenter)="onBreedHover(trigger, expandable)" (mouseleave)="onBreedMouseLeave(trigger, expandable)"
+    (click)="trigger.closeMenu()">
+    <a matLine (click)="onOptionClick('/breeds/' + breed.name)">{{
+      "- " + (breed.name | capitalize)
+      }}</a>
     <div *ngIf="expandable">
       <ng-container [ngTemplateOutlet]="insertIcon"
-        [ngTemplateOutletContext]="{'icon': 'chevron_right'}"></ng-container>
+        [ngTemplateOutletContext]="{ icon: 'chevron_right' }"></ng-container>
     </div>
   </mat-list-item>
-  <mat-menu class="submenu" #submenu="matMenu" overlapTrigger="false" xPosition="after">
+  <mat-menu class="submenu" #submenu="matMenu" overlapTrigger="true" xPosition="after"
+    [backdropClass]="'submenu-wrapper'">
     <div (mouseleave)="onSubBreedMouseLeave(trigger)" (mouseenter)="onSubBreedMouseEnter()">
       <mat-nav-list>
         <ng-container *ngFor="let subBreed of breed.subBreeds">
-          <mat-list-item>
-            <a matLine (click)="onOptionClick('/breeds/' + breed.name + '/'+ subBreed)"> {{ subBreed | capitalize }}</a>
+          <mat-list-item class="subsection-item">
+            <a matLine (click)="onOptionClick('/breeds/' + breed.name + '/' + subBreed)">
+              {{ subBreed | capitalize }}</a>
           </mat-list-item>
         </ng-container>
       </mat-nav-list>
     </div>
   </mat-menu>
 </ng-template>
+
 <ng-template #insertIcon let-icon="icon">
   <span class="material-symbols-outlined">
     {{ icon }}
