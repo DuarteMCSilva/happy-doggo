@@ -19,9 +19,9 @@ export class BreedComponent implements OnInit {
   public fullBreedName = '';
 
   constructor(
-    private activatedRoute: ActivatedRoute, 
-    private router: Router, 
-    private happyDogBusinessService: HappyDogBusinessService, 
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private happyDogBusinessService: HappyDogBusinessService,
     public happyDogStateService: HappyDogStateService,
     private capitalizePipe: CapitalizePipe) { }
 
@@ -29,7 +29,7 @@ export class BreedComponent implements OnInit {
     this.subscribeToActiveRoute();
   }
 
-  subscribeToActiveRoute(){
+  subscribeToActiveRoute() {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.selectedBreed = params.get('breed') ?? '';
       this.selectedSubBreed = params.get('sub') ?? '';
@@ -50,14 +50,15 @@ export class BreedComponent implements OnInit {
 
   fetchImageByBreed() {
     this.happyDogStateService.isLoading = true;
-    this.happyDogBusinessService.fetchImageByBreed(this.selectedBreed, this.selectedSubBreed, this.numResults).subscribe((urls: string[]) => {
-      this.imageURLs = urls;
-      this.happyDogStateService.isLoading = false;
-      if(this.imageURLs.length > 0) {
-        this.message = `Found ${this.imageURLs.length} results for ${this.fullBreedName}!`
-      } else {
-        this.message = 'Sorry! No results have been found!'
-      }
-    });
+    this.happyDogBusinessService.fetchImageByBreed(this.selectedBreed, this.selectedSubBreed, this.numResults)
+      .subscribe((urls: string[]) => {
+        this.imageURLs = urls;
+        this.happyDogStateService.isLoading = false;
+        if (this.imageURLs.length > 0) {
+          this.message = `Found ${this.imageURLs.length} results for ${this.fullBreedName}!`
+        } else {
+          this.message = 'Sorry! No results have been found!'
+        }
+      });
   }
 }
