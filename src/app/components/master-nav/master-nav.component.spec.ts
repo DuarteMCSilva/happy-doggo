@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MasterNavComponent } from './master-nav.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MasterNavComponent', () => {
   let component: MasterNavComponent;
@@ -8,6 +8,7 @@ describe('MasterNavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule.withRoutes([])],
       declarations: [ MasterNavComponent ]
     })
     .compileComponents();

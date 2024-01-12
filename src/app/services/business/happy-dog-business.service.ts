@@ -42,6 +42,5 @@ export class HappyDogBusinessService {
     } else {
       return this.dogApiService.getDoggoByBread(breed, numResults);
     }
-
   }
 }

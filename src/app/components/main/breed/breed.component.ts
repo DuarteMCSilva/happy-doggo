@@ -55,7 +55,7 @@ export class BreedComponent implements OnInit {
         this.imageURLs = urls;
         this.happyDogStateService.isLoading = false;
         if (this.imageURLs.length > 0) {
-          this.message = `Found ${this.imageURLs.length} results for ${this.fullBreedName}!`
+          this.message = `Found ${this.imageURLs.length} result(s) for ${this.fullBreedName}!`
         } else {
           this.message = 'Sorry! No results have been found!'
         }

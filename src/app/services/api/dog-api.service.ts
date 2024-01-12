@@ -91,7 +91,7 @@ interface BreedsSignature {
   [key: string]: string[];
 }
 
-interface GetResponseBreeds {
+export interface GetResponseBreeds {
   message: BreedsSignature;
   status: string;
 }

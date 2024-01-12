@@ -47,7 +47,7 @@ export class SearchFormComponent implements OnInit {
     if(subBreed) {
       const url = `breeds/${breed}/${subBreed}` 
       this.router.navigate([url]);
-    }
+    } // test
 
     this.router.navigate([`breeds/${breed}`]);
   }
