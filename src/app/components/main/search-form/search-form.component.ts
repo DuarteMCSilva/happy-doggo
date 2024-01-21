@@ -38,18 +38,18 @@ export class SearchFormComponent implements OnInit {
     })
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
     const params = form.form.value;
 
     const breed = params.breed.name;
-    const subBreed = params.subBreed;
+    const subBreed = params.subBreed?.toLowerCase();
     this.happyDogStateService.isLoading = true;
     if(subBreed) {
-      const url = `breeds/${breed}/${subBreed}` 
+      const url = `breeds/${breed}/${subBreed}`;
       this.router.navigate([url]);
-    } // test
-
-    this.router.navigate([`breeds/${breed}`]);
+    } else{
+      this.router.navigate([`breeds/${breed}`]);
+    }
   }
 
   onFeelingLucky() {
