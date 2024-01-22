@@ -4,18 +4,18 @@ import { HappyDogBusinessService } from 'src/app/services/business/happy-dog-bus
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { CapitalizePipe } from 'src/app/utils/capitalize.pipe';
+import { FormatBreedPipe } from 'src/app/pipes/breed-format.pipe';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 describe('BreedComponent', () => {
   let component: BreedComponent;
   let fixture: ComponentFixture<BreedComponent>;
   let happyDogBusinessService: HappyDogBusinessService;
-  let capitalizeMock: CapitalizePipe;
+  let formatBreed: FormatBreedPipe;
 
-  capitalizeMock = {
-    transform: ( input:string ) => {
-      return input[0].toUpperCase() + input.slice(1);
+  formatBreed = {
+    transform: ( input:string[] ) => {
+      return formatBreed.transform(input);
     }
   };
 
@@ -24,7 +24,7 @@ describe('BreedComponent', () => {
       imports: [ RouterTestingModule.withRoutes([]), HttpClientModule ],
       declarations: [ BreedComponent ],
       providers: [
-        { provide: CapitalizePipe, useFactory: () => capitalizeMock},
+        { provide: FormatBreedPipe, useFactory: () => formatBreed},
         {
           provide: ActivatedRoute, useValue: 
              { paramMap: of(convertToParamMap({"breed": "setter", "sub": "english"}))}
@@ -47,7 +47,7 @@ describe('BreedComponent', () => {
   });
 
   it('should update message some results are obtained', () => {
-    component.fullBreedName = 'Spaniel';
+    component.selectedBreedDetail = ['Spaniel'];
     spyOn(happyDogBusinessService, 'fetchImageByBreed').and.returnValue(of(['url']));
     component.fetchImageByBreed();
     expect(component.message).toEqual(`Found 1 result(s) for Spaniel!`);
@@ -62,8 +62,6 @@ describe('BreedComponent', () => {
   it('should extract route parameters to variables', () => {
     spyOn(happyDogBusinessService, 'fetchImageByBreed').and.returnValue(of(['url']));
 
-    expect(component.selectedBreed).toEqual('setter');
-    expect(component.selectedSubBreed).toEqual('english');
-    expect(component.fullBreedName).toEqual('Setter - English');
+    expect(component.selectedBreedDetail).toEqual(['setter','english']);
   });
 });

@@ -4,7 +4,7 @@
         <select id="breed" name="breed" [(ngModel)]="selectedBreedNode" required>
             <ng-container *ngFor="let breed of this.breedsTree$ | async">
                 <option [ngValue]="breed">
-                    {{ (breed.name | capitalize) + " (" + breed.subBreeds.length + ")" }}
+                    {{ (breed.name | titlecase) + " (" + breed.subBreeds.length + ")" }}
                 </option>
             </ng-container>
         </select>
@@ -13,7 +13,7 @@
             <select id="subBreed" name="subBreed" [(ngModel)]="selectedSubBreed" [disabled]="selectedBreedNode!.subBreeds.length<1">
                 <option ngValue='' selected> {{ "Any sub-breed" }}</option>
                 <ng-container *ngFor="let subBreed of selectedBreedNode?.subBreeds">
-                    <option> {{ subBreed | capitalize}}</option>
+                    <option> {{ subBreed | titlecase }}</option>
                 </ng-container>
             </select>
         </ng-container>

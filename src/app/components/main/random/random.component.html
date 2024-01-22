@@ -6,6 +6,6 @@
 <app-loading-notification *ngIf="(happyDogStateService.isLoading$| async)"></app-loading-notification>
 <hr>
 <div *ngIf="completeBreedName && !(happyDogStateService.isLoading$| async)" class="feedback-container">
-    <h3 class="message">{{ "It is a " + completeBreedName  + "!!" }}</h3>
+    <h3 class="message">{{ "It is a " + (completeBreedName | titlecase ) + "!!" }}</h3>
     <button class="more" (click)="onClickMoreResults()"> {{ "More results!" }} </button>
 </div>
