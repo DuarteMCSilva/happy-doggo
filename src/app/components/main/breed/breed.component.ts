@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { HappyDogBusinessService } from 'src/app/services/business/happy-dog-business.service';
 import { HappyDogStateService } from 'src/app/services/state/happy-dog-state.service';
-import { CapitalizePipe } from 'src/app/utils/capitalize.pipe';
+import { formatBreed } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-breed',
@@ -13,17 +13,14 @@ export class BreedComponent implements OnInit {
 
   public message = '';
   public imageURLs: string[] = [];
-  public selectedBreed = '';
-  public selectedSubBreed = '';
+  public selectedBreedDetail: string[] = [];
   public numResults = 25;
-  public fullBreedName = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private happyDogBusinessService: HappyDogBusinessService,
-    public happyDogStateService: HappyDogStateService,
-    private capitalizePipe: CapitalizePipe) { }
+    public happyDogStateService: HappyDogStateService) { }
 
   ngOnInit(): void {
     this.subscribeToActiveRoute();
@@ -31,34 +28,35 @@ export class BreedComponent implements OnInit {
 
   subscribeToActiveRoute() {
     this.activatedRoute.paramMap.subscribe((params) => {
-      this.selectedBreed = params.get('breed') ?? '';
-      this.selectedSubBreed = params.get('sub') ?? '';
+      this.selectedBreedDetail = this.updatedBreedDetail(params);
 
-      if (!this.selectedBreed) {
+      if (!this.selectedBreedDetail.length) {
         this.router.navigate(['/not-found']);
       }
-
       this.fetchImageByBreed();
-
-      this.fullBreedName = this.capitalizePipe.transform(this.selectedBreed);
-
-      if (this.selectedSubBreed) {
-        this.fullBreedName += ' - ' + this.capitalizePipe.transform(this.selectedSubBreed)
-      }
     })
   }
 
   fetchImageByBreed() {
     this.happyDogStateService.isLoading = true;
-    this.happyDogBusinessService.fetchImageByBreed(this.selectedBreed, this.selectedSubBreed, this.numResults)
+    this.happyDogBusinessService.fetchImageByBreed(this.selectedBreedDetail[0], this.selectedBreedDetail[1] ?? '', this.numResults)
       .subscribe((urls: string[]) => {
         this.imageURLs = urls;
         this.happyDogStateService.isLoading = false;
         if (this.imageURLs.length > 0) {
-          this.message = `Found ${this.imageURLs.length} result(s) for ${this.fullBreedName}!`
+          this.message = `Found ${this.imageURLs.length} result(s) for ${formatBreed(this.selectedBreedDetail)}!`
         } else {
           this.message = 'Sorry! No results have been found!'
         }
       });
+  }
+
+  updatedBreedDetail(params: ParamMap): string[] {
+    const breed = params.get('breed') ?? '';
+    const subBreed = params.get('sub') ?? '';
+    if(subBreed){
+      return [breed, subBreed]
+    }
+    return [breed];
   }
 }

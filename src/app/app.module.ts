@@ -16,7 +16,7 @@ import { HomeComponent } from './components/main/home/home.component';
 import { RandomComponent } from './components/main/random/random.component';
 import { NotFoundComponent } from './components/main/not-found/not-found.component';
 import { BreedComponent } from './components/main/breed/breed.component';
-import { CapitalizePipe } from './utils/capitalize.pipe';
+import { FormatBreedPipe } from './pipes/breed-format.pipe'; 
 import { ImageFrameComponent } from './components/main/image-grid/image-frame/image-frame.component';
 import { FormsModule }   from '@angular/forms';
 import { SearchFormComponent } from './components/main/search-form/search-form.component';
@@ -42,11 +42,11 @@ const routes: Routes = [
     RandomComponent,
     NotFoundComponent,
     BreedComponent,
-    CapitalizePipe,
     ImageFrameComponent,
     SearchFormComponent,
     ImageGridComponent,
-    LoadingNotificationComponent
+    LoadingNotificationComponent,
+    FormatBreedPipe
   ],
   imports: [
     BrowserModule,
@@ -60,10 +60,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [
-    HttpClient,
-    CapitalizePipe
-  ],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

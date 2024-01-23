@@ -34,6 +34,7 @@
     </mat-nav-list>
   </div>
 </nav>
+
 <ng-template #navItem let-action="action" let-text="text" let-icon="icon">
   <mat-list-item class="main-item">
     <a matLine (click)="action()"> {{ text }}</a>
@@ -49,7 +50,7 @@
     (mouseenter)="onBreedHover(trigger, expandable)" (mouseleave)="onBreedMouseLeave(trigger, expandable)"
     (click)="trigger.closeMenu()">
     <a matLine (click)="onOptionClick('/breeds/' + breed.name)">{{
-      "- " + (breed.name | capitalize)
+      "- " + (breed.name | titlecase)
       }}</a>
     <div *ngIf="expandable">
       <ng-container [ngTemplateOutlet]="insertIcon"
@@ -63,7 +64,7 @@
         <ng-container *ngFor="let subBreed of breed.subBreeds">
           <mat-list-item class="subsection-item">
             <a matLine (click)="onOptionClick('/breeds/' + breed.name + '/' + subBreed)">
-              {{ subBreed | capitalize }}</a>
+              {{ subBreed | titlecase }}</a>
           </mat-list-item>
         </ng-container>
       </mat-nav-list>
