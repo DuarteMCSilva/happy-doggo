@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+
 import { HappyDogStateService } from './happy-dog-state.service';
 
 describe('HappyDogStateService', () => {

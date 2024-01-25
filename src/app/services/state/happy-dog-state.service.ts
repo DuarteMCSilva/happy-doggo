@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+
 import { BreedNode } from 'src/app/model/happy-doggo-model';
 
 interface DoggoAppState {
