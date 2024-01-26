@@ -35,7 +35,7 @@ export class HappyDogBusinessService { // TODO: improve error handling
     });
   }
 
-  public fetchImageByBreed(breed: string, subBreed: string, numResults: number): Observable<string[]> {
+  public fetchImageByBreed([breed, subBreed]: string[], numResults: number): Observable<string[]> {
     if (subBreed) {
       return this.dogApiService.getDoggoBySubBread(breed, subBreed, numResults);
     } else {

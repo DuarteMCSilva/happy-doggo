@@ -1,30 +1,34 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BreedComponent } from './breed.component';
-import { HappyDogBusinessService } from 'src/app/services/business/happy-dog-business.service';
-import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { FormatBreedPipe } from 'src/app/pipes/breed-format.pipe';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { of } from 'rxjs';
+
+import { HappyDogBusinessService } from 'src/app/services/business/happy-dog-business.service';
+import { BreedComponent } from './breed.component';
+import { SearchFormComponent } from '../search-form/search-form.component';
+import { FormatBreedPipe } from 'src/app/pipes/breed-format.pipe';
+import { formatBreed } from 'src/app/utils/utils';
 
 describe('BreedComponent', () => {
   let component: BreedComponent;
   let fixture: ComponentFixture<BreedComponent>;
   let happyDogBusinessService: HappyDogBusinessService;
-  let formatBreed: FormatBreedPipe;
+  let formatBreedPipe: FormatBreedPipe;
 
-  formatBreed = {
+  formatBreedPipe = {
     transform: ( input:string[] ) => {
-      return formatBreed.transform(input);
+      return formatBreed(input);
     }
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ RouterTestingModule.withRoutes([]), HttpClientModule ],
-      declarations: [ BreedComponent ],
+      imports: [ RouterTestingModule.withRoutes([]), HttpClientModule, FormsModule ],
+      declarations: [ BreedComponent, SearchFormComponent, FormatBreedPipe ],
       providers: [
-        { provide: FormatBreedPipe, useFactory: () => formatBreed},
+        { provide: FormatBreedPipe, useFactory: () => formatBreedPipe},
         {
           provide: ActivatedRoute, useValue: 
              { paramMap: of(convertToParamMap({"breed": "setter", "sub": "english"}))}
@@ -46,22 +50,23 @@ describe('BreedComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should extract route parameters to variables', () => {
+    expect(component.breedDetails).toEqual(['setter','english']);
+  });
+
   it('should update message some results are obtained', () => {
-    component.selectedBreedDetail = ['Spaniel'];
     spyOn(happyDogBusinessService, 'fetchImageByBreed').and.returnValue(of(['url']));
-    component.fetchImageByBreed();
-    expect(component.message).toEqual(`Found 1 result(s) for Spaniel!`);
+    component.ngOnInit();
+    expect(component.breedDetails).toEqual(['setter', 'english']);
+    expect(component.imageURLs).toEqual(['url']);
+    expect(component.message).toEqual(`Found 1 result(s) for Setter - English!`)
   });
 
   it('should update message if no results are obtained', () => {
     spyOn(happyDogBusinessService, 'fetchImageByBreed').and.returnValue(of([]));
-    component.fetchImageByBreed();
+    component.ngOnInit();
+    expect(component.breedDetails).toEqual(['setter', 'english']);
+    expect(component.imageURLs).toEqual([]);
     expect(component.message).toEqual('Sorry! No results have been found!');
-  });
-
-  it('should extract route parameters to variables', () => {
-    spyOn(happyDogBusinessService, 'fetchImageByBreed').and.returnValue(of(['url']));
-
-    expect(component.selectedBreedDetail).toEqual(['setter','english']);
   });
 });
