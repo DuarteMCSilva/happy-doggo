@@ -2,10 +2,13 @@
 <app-search-form></app-search-form>
 
 <hr>
-<app-image-frame *ngIf="!(happyDogStateService.isLoading$| async)" [imageURL]="imageURL" [imageSize]=400 priority></app-image-frame>
-<app-loading-notification *ngIf="(happyDogStateService.isLoading$| async)"></app-loading-notification>
+<app-loading-notification *ngIf="(isLoading$| async)"></app-loading-notification>
+<ng-container *ngIf="(imageInfo$ | async) as imageInfo">
+    <app-image-frame [imageURL]="imageInfo.imageUrl" [imageSize]=400 priority></app-image-frame>
+    <div *ngIf="imageInfo.name" class="feedback-container">
+        <h3 class="message">{{ "It is a " + ( imageInfo.name | titlecase ) + "!!" }}</h3>
+        <button class="more" (click)="onClickMoreResults.bind(this, imageInfo.navLink)"> {{ "More results!" }}
+        </button>
+    </div>
+</ng-container>
 <hr>
-<div *ngIf="completeBreedName && !(happyDogStateService.isLoading$| async)" class="feedback-container">
-    <h3 class="message">{{ "It is a " + (completeBreedName | titlecase ) + "!!" }}</h3>
-    <button class="more" (click)="onClickMoreResults()"> {{ "More results!" }} </button>
-</div>

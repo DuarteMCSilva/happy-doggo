@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import { DogApiService } from '../api/dog-api.service';
-import { HappyDogStateService } from '../state/happy-dog-state.service';
-import { BreedNode } from 'src/app/model/happy-doggo-model';
-import { Observable} from 'rxjs';
+import { Observable, map } from 'rxjs';
+
+import { DogApiService } from 'src/app/services/api/dog-api.service';
+import { HappyDogStateService } from 'src/app/services/state/happy-dog-state.service';
+import { BreedNode, RandomImageInfo } from 'src/app/model/happy-doggo-model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HappyDogBusinessService {
+export class HappyDogBusinessService { // TODO: improve error handling
 
-  constructor(private dogApiService: DogApiService, private happyDogStateService: HappyDogStateService) {
-  }
+  constructor(
+    private dogApiService: DogApiService,
+    private happyDogStateService: HappyDogStateService
+    ) { }
 
   public getAllBreeds() {
     this.dogApiService.getAllBreeds().subscribe((response) => {
@@ -32,15 +35,41 @@ export class HappyDogBusinessService {
     });
   }
 
-  public fetchRandomImage(): Observable<string> {
-    return this.dogApiService.getRandomImage()
-  }
-
-  public fetchImageByBreed(breed: string, subBreed: string, numResults: number) {
+  public fetchImageByBreed([breed, subBreed]: string[], numResults: number): Observable<string[]> {
     if (subBreed) {
       return this.dogApiService.getDoggoBySubBread(breed, subBreed, numResults);
     } else {
       return this.dogApiService.getDoggoByBread(breed, numResults);
     }
+  }
+
+  public fetchRandomImage(): Observable<RandomImageInfo> {
+    return this.dogApiService.getRandomImage()
+      .pipe(map( (imgUrl) => {
+        const randomImageResponse =  this.computeBreedInfoFromRandomResponse(imgUrl); 
+        this.happyDogStateService.isLoading = false;
+        return randomImageResponse;
+      }
+    ))
+  }
+
+  private computeBreedInfoFromRandomResponse(response: string): RandomImageInfo {
+    const responseUrlSliced = response.split("/");
+    const indexOfBreed = 1 + responseUrlSliced.findIndex((ele) => ele === 'breeds');
+    // The breed comes after the resource /breeds, usually in the index 4.
+    const breedInfo = responseUrlSliced[indexOfBreed].split("-");
+    return { 
+      imageUrl: response,
+      name: breedInfo.join(" - "),
+      navLink: [ this.buildBreedNavUrl(breedInfo) ]
+    };
+  }
+
+  private buildBreedNavUrl(breedInfo: string[]): string {
+    let [breed, subBreed] = breedInfo;
+    if(!breed){
+      return `not-found`;
+    }
+    return `breeds/${breed}/${subBreed ?? ''}`;
   }
 }

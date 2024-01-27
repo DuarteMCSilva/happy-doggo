@@ -2,7 +2,7 @@
 <hr />
 <div *ngIf="!(happyDogStateService.isLoading$ | async)">
     <div class="title">
-        <h1>{{ selectedBreedDetail | formatBreed }} </h1>
+        <h1>{{ breedDetails | formatBreed }} </h1>
     </div>
     <h3>{{ message }}</h3>
 </div>
