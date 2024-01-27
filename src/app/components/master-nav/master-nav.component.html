@@ -26,7 +26,7 @@
           icon: isBreedExpanded ? 'expand_less' : 'expand_more'
         }"></ng-container>
       <div class="subsection" [ngClass]="{ collapsed: !isBreedExpanded }"
-        *ngFor="let breed of happyDogStateService.breedsTree">
+        *ngFor="let breed of breedsTree$ | async">
         <ng-container [ngTemplateOutlet]="secondaryNavItem"
           [ngTemplateOutletContext]="{breed, action: onOptionClick.bind(this, '/'), expandable: breed.subBreeds.length }">
         </ng-container>

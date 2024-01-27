@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { BreedNode } from 'src/app/model/happy-doggo-model';
 import { HappyDogStateService } from 'src/app/services/state/happy-dog-state.service';
 
 @Component({
@@ -13,6 +15,7 @@ export class MasterNavComponent implements OnInit {
   public data: any;
   public breeds: string[] = [];
   public subBreedsMap: Map<string, string[]> = new Map<string, string[]>();
+  public breedsTree$: Observable<BreedNode[]>;
 
   private breedButtonHoverTimeout?: NodeJS.Timeout;
 
@@ -23,7 +26,7 @@ export class MasterNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.isNavBarCollapsed = this.happyDogStateService.isNavbarCollapsed;
-
+    this.breedsTree$ = this.happyDogStateService.breedsTree$;
   }
 
   onClickCollapseButton(): void {
